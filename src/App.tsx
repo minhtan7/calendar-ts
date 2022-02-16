@@ -8,6 +8,7 @@ import AppointmentPicker from './components/AppointmentPicker';
 
 // import BookingPage from 'pages/BookingPage';
 import { LocationType } from '@lib/location';
+import BookingPage from 'pages/BookingPage';
 
 
 function App() {
@@ -91,7 +92,8 @@ function App() {
   console.log("date", date)
   return (
     <div className="flex App ">
-      <DatePicker date={date}
+      <BookingPage/>
+      {/* <DatePicker date={date}
         setDate={setDate}
         periodType={periodType}
         periodStartDate={periodStartDate}
@@ -103,8 +105,7 @@ function App() {
         weekStart={"Sunday"}
         eventLength={eventLength}
         minimumBookingNotice={minimumBookingNotice} />
-      {/* <BookingPage {...bookingPageProps}/> */}
-      <AppointmentPicker date={date} />
+      <AppointmentPicker date={date} /> */}
     </div>
   );
 }

@@ -12,7 +12,6 @@ type AppointmentPickerProps = {
 function AppointmentPicker({
     date
 }: AppointmentPickerProps): JSX.Element {
-    console.log('my date', date);
     //   const { t, i18n } = useLocale();
     // XXX: Add i18n support
 
@@ -36,17 +35,7 @@ function AppointmentPicker({
         }
         fetchRange()
     }, [date])
-const a = dayjs()
-console.log("a", a.add(1, "hour"))
 
-
-//     function addMinutes(date:Dayjs, minutes:number):Dayjs {
-//         dayjs.tz(date, "Vietnam/Ha_Noi")
-//         dayjs(date.)
-//         return new Date(date.getTime() + minutes*60000);
-// }
-
-    // const slots = ["07:00 PM", "08:00 PM", "09:00 PM"]
     return <div className="flex flex-col mt-8 text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5"><h1> {dayjs(date).toDate().toLocaleString('en-US', { dateStyle: "full" })} </h1>
         <div className="flex-grow overflow-y-auto md:h-[364px]">
             {slots.map((slot) => (
