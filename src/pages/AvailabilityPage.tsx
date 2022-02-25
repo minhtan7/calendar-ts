@@ -7,6 +7,7 @@ import { weekdayNames } from "../lib/weekday";
 import { ChevronDownIcon, ChevronRightIcon, PlusIcon, TrashIcon } from "@heroicons/react/solid";
 import Button from "components/ui/Button";
 import Select from "components/ui/Select";
+import { useParams } from "react-router-dom";
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -136,11 +137,11 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
         }
         return times;
     })();
+    const {mentorId} = useParams()
 
-    const mentorId = "620f48b4c5cbb1d42668775b"
     useEffect(() => {
         const fetchAvailability = async () => {
-            const url = `http://localhost:5000/${mentorId}/availability`
+            const url = `${process.env.BACKEND_URL}/${mentorId}/availability`
             const res = await fetch(url)
             const data = await res.json()
             const arr = [...data.ranges]
@@ -191,7 +192,7 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
         const updateAvailability = async () => {
-            const url = `http://localhost:5000/users/${mentorId}/availability`
+            const url = `${process.env.BACKEND_URL}/users/${mentorId}/availability`
             const res = await fetch(url, {
                 method: "PUT",
                 headers: {

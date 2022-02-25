@@ -20,11 +20,11 @@ function AppointmentPicker({
     // XXX: Add i18n support
 
     const [slots, setSlots] = useState<Array<string>>([])
-    let {menteeId} = useParams()
+    let {menteeId, mentorId} = useParams()
     console.log("mentee", menteeId)
     useEffect(()=>{
         const fetchRange = async ()=>{
-            let url = "http://localhost:5000/620f48b4c5cbb1d42668775b/availability"
+            let url = `${process.env.BACKEND_URL}/${mentorId}/availability`
 
             let newDate = dayjs(date).toISOString()
 

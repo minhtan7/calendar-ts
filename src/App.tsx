@@ -51,7 +51,7 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path='/availability' element={<AvailabilityPage/>}></Route>
+        <Route path='/availability/:mentorId' element={<AvailabilityPage/>}></Route>
         <Route path='/:mentorId/booking/:menteeId' element={<BookingPage/>}></Route>
       </Routes>
     </BrowserRouter>

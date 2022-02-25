@@ -84,7 +84,7 @@ function BookingPage() {
       }
     }
     const fetchNewSession = async () => {
-      const url = `http://localhost:5000/sessions`
+      const url = `${process.env.BACKEND_URL}/sessions`
       console.log("ulr", url)
       const res = await fetch(url, {
         method: "POST",
