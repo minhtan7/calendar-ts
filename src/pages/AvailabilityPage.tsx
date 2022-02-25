@@ -138,15 +138,16 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
         return times;
     })();
     const {mentorId} = useParams()
-
     useEffect(() => {
         const fetchAvailability = async () => {
-            const url = `${process.env.BACKEND_URL}/${mentorId}/availability`
+            const url = `${process.env.REACT_APP_BACKEND_URL}/${mentorId}/availability`
+            console.log("url", url)
             const res = await fetch(url)
             const data = await res.json()
             const arr = [...data.ranges]
             setSlots(arr)
             setIsFetch(true)
+            console.log("data", data)
         }
         fetchAvailability()
     }, [])
@@ -192,7 +193,7 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
         const updateAvailability = async () => {
-            const url = `${process.env.BACKEND_URL}/users/${mentorId}/availability`
+            const url = `${process.env.REACT_APP_BACKEND_URL}/users/${mentorId}/availability`
             const res = await fetch(url, {
                 method: "PUT",
                 headers: {
@@ -239,6 +240,8 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
                                                             value={dayjs(range.startTime).diff(dayjs(0)) ? getOption(dayjs(range.startTime)) : null}
                                                             onChange={(option) => {
                                                                 slot.ranges[indexRange].startTime = dayjs(option?.value).format()
+                                                                console.log(option?.value)
+                                                                console.log("first",dayjs(option?.value).format())
                                                                 setSlots([...slots])
                                                             }}
                                                         />

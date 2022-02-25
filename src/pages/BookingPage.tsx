@@ -84,7 +84,7 @@ function BookingPage() {
       }
     }
     const fetchNewSession = async () => {
-      const url = `${process.env.BACKEND_URL}/sessions`
+      const url = `${process.env.REACT_APP_BACKEND_URL}/sessions`
       console.log("ulr", url)
       const res = await fetch(url, {
         method: "POST",

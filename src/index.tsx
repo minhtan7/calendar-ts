@@ -4,6 +4,8 @@ import './assets/main.css';
 import "./App.css"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import * as dotenv from "dotenv"
+// dotenv.config({ path: __dirname+'/.env' })
 
 ReactDOM.render(
   <React.StrictMode>
