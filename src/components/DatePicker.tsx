@@ -16,13 +16,13 @@ import getSlots from "../lib/slots";
 import { WorkingHours } from "../lib/types/schedule";
 
 import Loader from "./Loader";
+import BookingModal from "./BookingModal";
 
 enum PeriodType {
   ROLLING = "rolling",
   RANGE = "range",
   UNLIMITED = "unlimited"
 }
-console.log("peeee", PeriodType.ROLLING);
 dayjs.extend(dayjsBusinessTime);
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -53,10 +53,10 @@ function isOutOfBounds(
   }: any
 ) {
   const date = dayjs(time);
-  console.log("period", periodType);
+
   switch (periodType) {
     case PeriodType.ROLLING: {
-      console.log("rolling", dayjs().utcOffset(date.utcOffset()).add(periodDays!, "days").endOf("day"));
+
       const periodRollingEndDay = periodCountCalendarDays
         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         dayjs().utcOffset(date.utcOffset()).add(periodDays!, "days").endOf("day")
@@ -97,7 +97,8 @@ function DatePicker({
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
   const [isFirstMonth, setIsFirstMonth] = useState<boolean>(false);
-  console.log("perrrrrr", periodType);
+  
+
 
 
   useEffect(() => {
@@ -129,7 +130,7 @@ function DatePicker({
 
     const isDisabled = (day: number) => {
       const date = browsingDate.startOf("day").date(day);
-      console.log("date1", date);
+
       return (
         isOutOfBounds(date, {
           periodType,
@@ -148,7 +149,7 @@ function DatePicker({
     };
 
     const daysInMonth = browsingDate.daysInMonth();
-    console.log("day in month", daysInMonth);
+
     for (let i = 1; i <= daysInMonth; i++) {
       days.push({ disabled: isDisabled(i), date: i });
     }
@@ -200,7 +201,7 @@ function DatePicker({
   //     );
   //   };
   //   isDisabled(7)
-
+  
   return (
     <div
       className={
@@ -248,28 +249,32 @@ function DatePicker({
             {day === null ? (
               <div key={`e-${idx}`} />
             ) : (
-              <button
-                disabled={day.disabled}
-                className={classNames(
-                  "absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center ",
-                  "hover:border hover:border-brand dark:hover:border-white bg-brand text-brandcontrast",
-                  day.disabled ? "cursor-default font-light text-gray-400 hover:border-0" : "font-medium",
-                  date && date.isSame(browsingDate.date(day.date), "day")
-                    ? "bg-brand text-brandcontrast"
-                    : !day.disabled
-                      ? " bg-gray-100 hover:!border-black"
-                      : ""
-                )}
-                data-testid="day"
-                data-disabled={day.disabled}
-                onClick={() => { setDate(dayjs(browsingDate.date(day.date))) }}
-              >
-                {day.date}
-              </button>
-
+              <>
+                <button
+                  disabled={day.disabled}
+                  className={classNames(
+                    "absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center ",
+                    "hover:border hover:border-brand dark:hover:border-white bg-brand text-brandcontrast",
+                    day.disabled ? "cursor-default font-light text-gray-400 hover:border-0" : "font-medium",
+                    date && date.isSame(browsingDate.date(day.date), "day")
+                      ? "bg-brand text-brandcontrast"
+                      : !day.disabled
+                        ? " bg-gray-100 hover:!border-black"
+                        : ""
+                  )}
+                  data-testid="day"
+                  data-disabled={day.disabled}
+                  onClick={() => { setDate(dayjs(browsingDate.date(day.date))) }}
+                >
+                  {day.date}
+                </button>
+              </>
             )}
           </div>
         ))}
+                
+               
+
       </div>
     </div>
   );
