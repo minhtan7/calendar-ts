@@ -204,17 +204,19 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
                 })
             })
             const data = await res.json()
-
         }
         updateAvailability()
     }
 
-
     
     return (
-        <div className="grid grid-cols-3 gap-2 m-auto">
-            <h1 >Availability</h1>
-            <form className="col-span-3 space-y-2 lg:col-span-2" onSubmit={handleSubmit}>
+        <div className="w-1/3 m-auto">
+            <div className="text-center">
+                <h1>Availability</h1>
+            </div>
+            <div className="flex flex-col flex-1 overflow-hidden">
+                <div className="w-full m-auto mb-4">
+                 <form className="col-span-3 space-y-2 lg:col-span-2" onSubmit={handleSubmit}>
                 <div className="px-4 py-5 bg-white border border-gray-200 divide-y rounded-sm sm:p-6">
                     <h3>Change the start and end times of your day</h3>
                     <fieldset className="divide-y divide-gray-200">
@@ -222,15 +224,15 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
                             slots.map((slot, indexSlot) => {
                                 return (
                                     <fieldset key={indexSlot} className="flex min-h-[86px] justify-between space-y-2 py-5 sm:flex-row sm:space-y-0">
-                                        <div className="w-1/3">
+                                        <div className="w-1/3 m-auto">
                                             <label className="flex items-center space-x-2 rtl:space-x-reverse">
-                                                <input type="checkbox" className="inline-block border-gray-300 rounded-sm text-neutral-900 focus:ring-neutral-500" />
+                                                {/* <input type="checkbox" className="inline-block border-gray-300 rounded-sm text-neutral-900 focus:ring-neutral-500" /> */}
                                                 <span className="inline-block text-sm capitalize">{slot.day}</span>
                                             </label>
                                         </div>
                                         <div className="flex-grow " >
                                             {slot.ranges.map((range, indexRange, arrRange) => {
-                                                 return (<div className="flex justify-between mb-1" key={indexRange}>
+                                                 return (<div className="flex justify-between" key={indexRange}>
                                                     <div className="flex items-center space-x-2 rtl:space-x-reverse">
 
                                                         <Select
@@ -270,7 +272,7 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
                                                 </div>
                                             )})}
                                         </div>
-                                        <div>
+                                        <div >
                                             <Button
                                                 color="minimal"
                                                 size="icon"
@@ -283,18 +285,21 @@ function AvailabilityPage({ }: AvailabilityPageProps): JSX.Element {
                                         <div>
 
                                         </div>
-                                    </fieldset>)
+                                    </fieldset>) 
                             })
                         }
                     </fieldset>
 
                 </div>
-                <div className="text-right">
-                    <button type="submit" className="relative inline-flex items-center px-3 py-2 text-sm font-medium border border-transparent rounded-sm dark:text-brandcontrast text-brandcontrast bg-brand dark:bg-brand hover:bg-opacity-90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900">
+                <div className="!mb-4 !mr-4 text-right">
+                    <button type="submit" className="relative inline-flex items-center px-3 py-2 text-sm font-medium border rounded-sm dark:text-brandcontrast text-brandcontrast bg-brand dark:bg-brand hover:bg-opacity-90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900">
                         Save
                     </button>
                 </div>
             </form>
+        </div>
+            </div>
+        
         </div>
     )
 }

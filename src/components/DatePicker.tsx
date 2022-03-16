@@ -253,15 +253,15 @@ function DatePicker({
                 <button
                   disabled={day.disabled}
                   className={classNames(
-                    "absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center ",
-                    "hover:border hover:border-brand dark:hover:border-white bg-brand text-brandcontrast",
-                    day.disabled ? "cursor-default font-light text-gray-400 hover:border-0" : "font-medium",
-                    date && date.isSame(browsingDate.date(day.date), "day")
-                      ? "bg-brand text-brandcontrast"
-                      : !day.disabled
-                        ? " bg-gray-100 hover:!border-black"
-                        : ""
-                  )}
+                  "absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center",
+                  "hover:border-brand hover:border dark:hover:border-white",
+                  day.disabled ? "cursor-default font-light text-gray-400 hover:border-0" : "font-medium",
+                  date && date.isSame(browsingDate.date(day.date), "day")
+                    ? "bg-brand text-brandcontrast dark:bg-darkmodebrand dark:text-darkmodebrandcontrast"
+                    : !day.disabled
+                    ? " bg-gray-100 dark:bg-gray-600 dark:text-white"
+                    : ""
+                )}
                   data-testid="day"
                   data-disabled={day.disabled}
                   onClick={() => { setDate(dayjs(browsingDate.date(day.date))) }}

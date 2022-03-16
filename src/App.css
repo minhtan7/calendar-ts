@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.css-qc6sy-singleValue{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

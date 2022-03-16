@@ -26,9 +26,10 @@ interface SessionState {
 }
 
 function BookingPage() {
-  const [show, setShow] = useState<boolean>(false)
+  
+  
   const onDatePicked = new Date()
-  const [date, setDate] = useState<Dayjs>(dayjs())
+  const [date, setDate] = useState<Dayjs>(dayjs().add(2,"day"))
   const [session, setSession] = useState<SessionState>({})
   let { mentorId, menteeId } = useParams()
 
@@ -65,40 +66,10 @@ function BookingPage() {
     }
   ]
 
-  const handleModal = () => {
-    setShow(!show)
-  }
-  const createSession = ({ slot, menteeId, date }: any): void => {
-    const slotInCurrentDay = dayjs(slot,"hh:mm a")
-    const hour = slotInCurrentDay.get('hour')
-    const minute = slotInCurrentDay.get("minute")
-    const startAt =  date.clone().startOf("date").set("hour", hour).set("minute", minute)
-    const endAt = startAt.clone().add(60, "minute")
-    const body = {
-      triggerEvent: "BOOKING",
-      payload: {
-        mentor: mentorId,
-        mentee: menteeId,
-        startAt,
-        endAt
-      }
-    }
-    const fetchNewSession = async () => {
-      const url = `${process.env.REACT_APP_BACKEND_URL}/sessions`
-      console.log("ulr", url)
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
-      })
-      const data = await res.json()
-      console.log("data", data)
-    }
-    fetchNewSession()
-  }
-  return <div className="flex App">
+ 
+  
+  return <div className="flex items-center justify-center w-screen h-screen m-auto App">
+    <div className="flex justify-around w-3/5 p-4 py-5 border border-brand">
     <DatePicker date={date}
       setDate={setDate}
       periodType={periodType}
@@ -111,8 +82,8 @@ function BookingPage() {
       weekStart={"Sunday"}
       eventLength={eventLength}
       minimumBookingNotice={minimumBookingNotice} />
-    <AppointmentPicker date={date} handleModal={handleModal} createSession={createSession} />
-    <BookingModal show={show} setShow={setShow} />
+    <AppointmentPicker date={date} />
+  </div>
   </div>
 }
 
